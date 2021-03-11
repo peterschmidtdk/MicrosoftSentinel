@@ -1,0 +1,4 @@
+SecurityEvent
+ | where EventID == 4726
+ | where TargetUserName == 'UserAlias'
+ | where TimeGenerated > ago(24h)
