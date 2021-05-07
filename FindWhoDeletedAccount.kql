@@ -1,3 +1,4 @@
+// KQL Query to find any deleted account last 24 hours, based on eventid 4726
 SecurityEvent
  | where EventID == 4726
  | where TargetUserName == 'UserAlias'
