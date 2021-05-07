@@ -1,0 +1,3 @@
+// KQL Query to find all events based on eventid 4726
+SecurityEvent
+ | where EventID == 4726

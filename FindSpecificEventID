@@ -1,2 +1,0 @@
-SecurityEvent
- | where EventID == 4726
