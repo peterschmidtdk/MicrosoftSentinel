@@ -1,0 +1,9 @@
+// KQL Query to use with Sentinel to seach for any new Inbox Rules created in Exchange within the last 90 days
+let timeframe = 90d;
+OfficeActivity
+| where TimeGenerated >= ago(timeframe)
+| where Operation =~ "New-InboxRule"
+| extend ClientIPAddress = case( ClientIP has ".", tostring(split(ClientIP,":")[0]), ClientIP has "[", tostring(trim_start(@'[[]',tostring(split(ClientIP,"]")[0]))), ClientIP )
+| extend RuleDetail = case(OfficeObjectId contains '/' , tostring(split(OfficeObjectId, '/')[-1]) , tostring(split(OfficeObjectId, '\\')[-1]))
+| summarize count(), StartTimeUtc = min(TimeGenerated), EndTimeUtc = max(TimeGenerated) by  Operation, UserId, ClientIPAddress, ResultStatus, OriginatingServer, OfficeObjectId, RuleDetail
+| extend timestamp = StartTimeUtc,  IPCustomEntity = ClientIPAddress, AccountCustomEntity = UserId , HostCustomEntity =  OriginatingServer
