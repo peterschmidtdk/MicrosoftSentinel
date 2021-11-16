@@ -1,2 +1,2 @@
-# AzureSentinel
-A Repository for Azure Sentinel querys and other related Azure Sentinel code.
+# MicrosoftSentinel
+A Repository for Microsoft Sentinel (formerly known as Azure Sentinel) querys and other related Microsoft Sentinel code.
